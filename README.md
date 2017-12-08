@@ -1,6 +1,8 @@
 # graphql-document-collector
 Load up smartly, in one location, all of the GraphQL queries/mutations/subscriptions of your project
 
+[![npm version](https://badge.fury.io/js/graphql-document-collector.svg)](https://badge.fury.io/js/graphql-document-collector) [![Get on Slack](https://img.shields.io/badge/slack-join-orange.svg)](http://www.apollostack.com/#slack)
+
 ## Installation
 
 ```
