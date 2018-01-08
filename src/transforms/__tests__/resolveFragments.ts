@@ -57,5 +57,16 @@ describe('Resolve fragments transformer', () => {
         assert.equal(transformedRoot.directories[1].documents[0].definitions.length, 3);
       });
     });
+
+    it('should not re-add fragments already defined in the document', () => {
+      return loadGlob(
+        path.join(__dirname, '..', '..', '..', 'example'),
+        '**/*.graphql'
+      )
+      .then((root: DocumentDirectory) => {
+        const transformedRoot = resolveFragments(resolveFragments(root));
+        assert.equal(transformedRoot.directories[1].documents[0].definitions.length, 3);
+      });
+    });
   });
 });
