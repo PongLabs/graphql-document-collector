@@ -44,11 +44,11 @@ function fragmentSpreadsInSelectionSet(
 
 export function addFragmentsToDocument(document: DocumentNode, fMap: FragmentMap): DocumentNode {
   // TODO: make this function pure
-  let definedFragments: Array<string> = [];
-  let fragmentSpreads: Set<string> = new Set()
+  const definedFragments: Set<string> = new Set();
+  const fragmentSpreads: Set<string> = new Set()
   document.definitions.forEach(def => {
     if (def.kind === 'FragmentDefinition') {
-      definedFragments.push((def as FragmentDefinitionNode).name.value);
+      definedFragments.add(def.name.value);
     }
 
     if (def.kind === 'OperationDefinition' || def.kind === 'FragmentDefinition') {
@@ -59,7 +59,7 @@ export function addFragmentsToDocument(document: DocumentNode, fMap: FragmentMap
   return Object.assign({}, document, {
     definitions: [
       ...document.definitions,
-      ...Array.from(fragmentSpreads).filter(sp => definedFragments.indexOf(sp) === -1).map(sp => fMap[sp]),
+      ...Array.from(fragmentSpreads).filter(sp => !definedFragments.has(sp)).map(sp => fMap[sp]),
     ],
   });
 }
