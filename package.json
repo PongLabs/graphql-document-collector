@@ -1,6 +1,6 @@
 {
   "name": "graphql-document-collector",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Load up smartly, in one location, all of the GraphQL queries/mutations/subscriptions of your project",
   "main": "lib",
   "bin": {
