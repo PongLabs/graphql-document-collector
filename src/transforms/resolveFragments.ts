@@ -5,6 +5,7 @@ import {
   SelectionSetNode,
   FragmentSpreadNode,
   FieldNode,
+  InlineFragmentNode,
 } from 'graphql';
 import {DocumentDirectory} from '../ast';
 
@@ -37,6 +38,8 @@ function fragmentSpreadsInSelectionSet(
       fragmentSpreadsInSelectionSet(fMap[fragmentName].selectionSet, fMap, fragmentSpreads);
     } else if (sel.kind === 'Field' && (sel as FieldNode).selectionSet) {
       fragmentSpreadsInSelectionSet((sel as FieldNode).selectionSet, fMap, fragmentSpreads);
+    } else if ((sel.kind === 'InlineFragment')) {
+      fragmentSpreadsInSelectionSet((sel as InlineFragmentNode).selectionSet, fMap, fragmentSpreads);
     }
   });
   return fragmentSpreads;
